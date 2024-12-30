@@ -6,7 +6,7 @@ import islandScene from "../assets/3d/island.glb";
 import { a } from "@react-spring/three";
 import { use } from "react";
 
-const Island = ({ isRotating, setIsRotating, ...props }) => {
+const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   const islandRef = useRef();
   const { gl, viewport } = useThree();
   const { nodes, materials } = useGLTF(islandScene);
@@ -27,20 +27,21 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
     e.stopPropagation();
     e.preventDefault();
     setIsRotating(false);
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const delta = clientX - lastX.current / viewport.width;
-
-    islandRef.current.rotation.y += delta * 0.01 * Math.PI;
-    lastX.current = clientX;
-
-    rotationSpeed.current = delta * 0.01 * Math.PI;
   };
 
   const handlePointerMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
 
-    if (isRotating) handlePointerUp(e);
+    if (isRotating) {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const delta = (clientX - lastX.current) / viewport.width;
+
+      islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+      lastX.current = clientX;
+
+      rotationSpeed.current = delta * 0.01 * Math.PI;
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -65,6 +66,7 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
       if (Math.abs(rotationSpeed.current) < 0.001) {
         rotationSpeed.current = 0;
       }
+      islandRef.current.rotation.y += rotationSpeed.current;
     } else {
       const rotation = islandRef.current.rotation.y;
       const normalizedRotation =
@@ -90,15 +92,16 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
   });
 
   useEffect(() => {
-    documentnt.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("pointerup", handlePointerUp);
-    document.addEventListener("pointermove", handlePointerMove);
+    const canvas = gl.domElement;
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointermove", handlePointerMove);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
     return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("pointerup", handlePointerUp);
-      document.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerdown", handlePointerDown);
+      canvas.removeEventListener("pointerup", handlePointerUp);
+      canvas.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
