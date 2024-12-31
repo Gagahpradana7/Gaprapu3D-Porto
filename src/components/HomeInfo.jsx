@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const rendederContent = {
   1: (
-    <h1 className="text-base text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-semibold bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-6">
+    <h1 className="text-base text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-6">
       Hi, My Name Is <span className="font-bold">Gagah Pradana</span>
       <span
         className="inline-block ml-1 animate-waving-hand"
@@ -17,7 +17,7 @@ const rendederContent = {
     </h1>
   ),
   2: (
-    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md sm:text-base text-white font-semibold bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
+    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md sm:text-base text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
       I attended a full-stack JavaScript bootcamp <br />
       and gained many skills along the way.
       <Link
@@ -29,7 +29,7 @@ const rendederContent = {
     </div>
   ),
   3: (
-    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-semibold bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
+    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
       Explore my projects to see how I apply my skills.
       <Link
         to="/projects"
@@ -40,7 +40,7 @@ const rendederContent = {
     </div>
   ),
   4: (
-    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-semibold bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
+    <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
       Want to hire me or get in touch? Let's talk!
       <Link
         to="/contact"
