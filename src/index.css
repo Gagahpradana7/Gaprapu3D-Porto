@@ -4,6 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-waving-hand {
+  display: inline-block;
+  animation: wave 2s infinite;
+}
+
 :root {
   --blue-rgb: 237 245 255;
   --green-rgb: 125 161 35;
