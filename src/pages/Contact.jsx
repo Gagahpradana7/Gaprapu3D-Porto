@@ -8,7 +8,7 @@ const Contact = () => {
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className="head-text">Contact me</h1>
         <p className="mt-2 font-poppins text-slate-gray text-base leading-8 max-w-lg">
-          click the fox if you want to contact me
+          Click the fox if you want to contact me
         </p>
       </div>
       <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
