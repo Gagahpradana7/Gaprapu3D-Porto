@@ -13,7 +13,7 @@ const About = () => {
           Click the cat if you want to know more about me
         </p>
       </div>
-      <div className="lg:w-1/2 w-full lg:h-[600px] md:h-[550px] h-[350px]">
+      <div className="lg:w-1/2 w-full lg:h-[600px] md:h-[550px] h-[350px] mb-16 cursor-pointer">
         <Canvas
           camera={{
             position: [0, 1.5, 3],

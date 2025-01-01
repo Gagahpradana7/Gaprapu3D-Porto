@@ -6,7 +6,7 @@ const Navbar = () => {
     <header className="header">
       <NavLink
         to={"/"}
-        className="w-10 h-10 rounded-lgbg-white flex items-center justify-center font-bold shadow-md backdrop-brightness-110 backdrop-blur-md"
+        className="w-10 h-10 rounded-lg bg-white flex items-center justify-center font-bold shadow-md backdrop-brightness-110 backdrop-blur-md"
       >
         <p className="blue-gradient_text ">GNH</p>
       </NavLink>
@@ -14,7 +14,7 @@ const Navbar = () => {
         <NavLink
           to={"/about"}
           className={({ isActive }) =>
-            isActive ? "text-blue-500" : "text-black"
+            isActive ? "text-blue-500" : "text-gray-400"
           }
         >
           About
@@ -22,7 +22,7 @@ const Navbar = () => {
         <NavLink
           to={"/projects"}
           className={({ isActive }) =>
-            isActive ? "text-purple-500" : "text-black"
+            isActive ? "text-purple-500" : "text-gray-400"
           }
         >
           Projects
@@ -30,7 +30,7 @@ const Navbar = () => {
         <NavLink
           to={"/contact"}
           className={({ isActive }) =>
-            isActive ? "text-green-600" : "text-black"
+            isActive ? "text-green-600" : "text-gray-400"
           }
         >
           Contact

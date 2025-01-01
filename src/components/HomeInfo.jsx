@@ -18,8 +18,8 @@ const rendederContent = {
   ),
   2: (
     <div className="text-center py-2 px-4 mx-3 my-2 rounded-md sm:text-base text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
-      I attended a full-stack JavaScript bootcamp <br />
-      and gained many skills along the way.
+      I attended a full-stack JavaScript <br /> bootcamp and gained many skills
+      along the way.
       <Link
         to="/about"
         className="mt-2 block bg-white rounded-md py-1 px-3 text-blue-600 font-medium hover:bg-gray-50 transition-colors"
@@ -30,7 +30,7 @@ const rendederContent = {
   ),
   3: (
     <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
-      Explore my projects to see how I apply my skills.
+      Explore my projects to see how <br /> I apply my skills.
       <Link
         to="/projects"
         className="mt-2 block bg-white rounded-md py-1 px-3 text-blue-600 font-medium hover:bg-gray-50 transition-colors"
@@ -41,7 +41,7 @@ const rendederContent = {
   ),
   4: (
     <div className="text-center py-2 px-4 mx-3 my-2 rounded-md text-white font-poppins bg-gradient-to-r from-purple-600 to-blue-500 shadow-sm -mt-4">
-      Want to hire me or get in touch? Let's talk!
+      Want to hire me or get in touch? <br /> Let's talk!
       <Link
         to="/contact"
         className="mt-2 block bg-white rounded-md py-1 px-3 text-blue-600 font-medium hover:bg-gray-50 transition-colors"
