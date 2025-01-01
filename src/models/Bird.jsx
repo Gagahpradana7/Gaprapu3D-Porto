@@ -22,11 +22,11 @@ const Bird = () => {
     }
 
     if (birdRef.current.rotation.y === 0) {
-      birdRef.current.position.x += 0.02;
-      birdRef.current.position.z -= 0.02;
+      birdRef.current.position.x += 0.006;
+      birdRef.current.position.z -= 0.006;
     } else {
-      birdRef.current.position.x -= 0.02;
-      birdRef.current.position.z += 0.02;
+      birdRef.current.position.x -= 0.006;
+      birdRef.current.position.z += 0.006;
     }
   });
 

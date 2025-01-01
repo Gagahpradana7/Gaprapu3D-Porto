@@ -107,7 +107,7 @@ const Sky = ({ isRotating, setIsRotating, ...props }) => {
         saturation={0.9}
         fade
       />
-      <ambientLight intensity={-0.6} />
+      <ambientLight intensity={-0.5} />
     </a.group>
   );
 };
