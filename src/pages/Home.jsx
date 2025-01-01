@@ -9,21 +9,45 @@ import HomeInfo from "../components/HomeInfo";
 import zelda from "../assets/zelda.mp3";
 import soundon from "../assets/icons/soundon.png";
 import soundoff from "../assets/icons/soundoff.png";
+
 const Home = () => {
-  const audioRef = useRef(new Audio(zelda));
-  audioRef.current.volume = 0.3;
-  audioRef.current.loop = true;
+  const audioRef = useRef(null);
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+
   useEffect(() => {
-    if (isPlaying) {
-      audioRef.current.play();
-    }
-    return () => {
-      audioRef.current.pause();
+    audioRef.current = new Audio(zelda);
+    audioRef.current.volume = 0.3;
+    audioRef.current.loop = true;
+
+    const playAudio = async () => {
+      try {
+        await audioRef.current.play();
+      } catch (error) {
+        setIsPlaying(false);
+      }
     };
+    playAudio();
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.play().catch(() => setIsPlaying(false));
+    } else {
+      audioRef.current.pause();
+    }
   }, [isPlaying]);
+
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
     let screenPosition = [0, -6.5, -43];
@@ -74,7 +98,7 @@ const Home = () => {
           <directionalLight position={[1, 1, 1]} intensity={1} />
           <ambientLight intensity={0.5} />
           <hemisphereLight
-            skyyColor="#b1e1ff"
+            skyColor="#b1e1ff"
             groundColor="#000000"
             intensity={0.5}
           />
@@ -101,9 +125,7 @@ const Home = () => {
           src={!isPlaying ? soundoff : soundon}
           alt="sound"
           className="w-10 h-10 cursor-pointer object-contain"
-          onClick={() => {
-            setIsPlaying(!isPlaying);
-          }}
+          onClick={() => setIsPlaying(!isPlaying)}
         />
       </div>
     </section>
