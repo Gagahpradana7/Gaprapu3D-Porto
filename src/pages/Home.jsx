@@ -124,7 +124,7 @@ const Home = () => {
         <img
           src={!isPlaying ? soundoff : soundon}
           alt="sound"
-          className="w-10 xl:h-10 lg:h-24 h-28  cursor-pointer object-contain"
+          className="w-10 xl:h-10 h-36  cursor-pointer object-contain"
           onClick={() => setIsPlaying(!isPlaying)}
         />
       </div>
