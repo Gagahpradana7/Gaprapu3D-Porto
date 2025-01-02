@@ -12,22 +12,16 @@ import soundon from "../assets/icons/soundon.png";
 import soundoff from "../assets/icons/soundoff.png";
 
 const TutorialOverlay = () => {
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [initialized, setInitialized] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(null);
 
   useEffect(() => {
-    if (!initialized) {
-      const hasSeenTutorial = window.localStorage.getItem("hasSeenTutorial");
-      if (hasSeenTutorial === "true") {
-        setShowOverlay(false);
-      }
-      setInitialized(true);
-    }
-  }, [initialized]);
+    const hasSeenTutorial = localStorage.getItem("hasSeenTutorial");
+    setShowOverlay(hasSeenTutorial !== "true");
+  }, []);
 
   const handleClose = () => {
     try {
-      window.localStorage.setItem("hasSeenTutorial", "true");
+      localStorage.setItem("hasSeenTutorial", "true");
       setShowOverlay(false);
     } catch (error) {
       console.error("Error saving to localStorage:", error);
@@ -35,7 +29,7 @@ const TutorialOverlay = () => {
     }
   };
 
-  if (!initialized) return null;
+  if (showOverlay === null) return null;
   if (!showOverlay) return null;
 
   return (
@@ -55,19 +49,22 @@ const TutorialOverlay = () => {
           <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
             <MoveLeft className="w-8 h-8 text-blue-600 animate-pulse" />
             <p className="text-gray-700">
-              Swipe left or drag to rotate the island
+              Swipe left or use the keyboard arrow in PC to rotate the island
+              portfolio
             </p>
           </div>
 
           <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
             <MoveRight className="w-8 h-8 text-blue-600 animate-pulse" />
             <p className="text-gray-700">
-              Swipe right or drag to rotate the island
+              Swipe right or use the keyboard arrow in PC to rotate the island
+              portfolio
             </p>
           </div>
 
           <p className="text-sm text-gray-600 text-center">
-            Explore different views of the island to discover more information
+            Explore different views of the island portfolio to discover more
+            information
           </p>
         </div>
 
@@ -90,7 +87,7 @@ const Home = () => {
 
   useEffect(() => {
     audioRef.current = new Audio(zelda);
-    audioRef.current.volume = 0.5;
+    audioRef.current.volume = 0.7;
     audioRef.current.loop = true;
 
     const playAudio = async () => {
