@@ -18,7 +18,7 @@ const Home = () => {
 
   useEffect(() => {
     audioRef.current = new Audio(zelda);
-    audioRef.current.volume = 0.3;
+    audioRef.current.volume = 0.4;
     audioRef.current.loop = true;
 
     const playAudio = async () => {
