@@ -11,7 +11,7 @@ const Contact = () => {
           Click the fox if you want to contact me
         </p>
       </div>
-      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] mt-0 mb-24 cursor-pointer">
+      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px] mt-0 xl:mb-24 mb-48 cursor-pointer">
         <Canvas camera={{ position: [0, 0, 5], fov: 75, near: 0.1, far: 1000 }}>
           <directionalLight intensity={2} position={[0, 0, 1]} />
           <ambientLight intensity={0.5} />

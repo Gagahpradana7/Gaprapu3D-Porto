@@ -13,7 +13,7 @@ const Projects = () => {
           Click the Shiba to see all my projects
         </p>
       </div>
-      <div className="lg:w-1/2 w-full lg:h-[400px] md:h-[550px] h-[350px] mb-24 cursor-pointer">
+      <div className="lg:w-1/2 w-full lg:h-[400px] md:h-[550px] h-[350px] xl:my-0 xl:mb-24 mb-52 cursor-pointer">
         <Canvas
           camera={{
             position: [0, 2, 5],

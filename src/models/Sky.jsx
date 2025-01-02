@@ -15,7 +15,7 @@ const Sky = ({ isRotating, setIsRotating, ...props }) => {
   sky.scene.traverse((node) => {
     if (node.isMesh && node.material) {
       node.material.color.set("#07285d");
-      node.material.emissive.set("#0a2247");
+      node.material.emissive.set("#0c2f60");
       node.material.emissiveIntensity = 0.6;
     }
   });
@@ -100,14 +100,14 @@ const Sky = ({ isRotating, setIsRotating, ...props }) => {
         <primitive object={sky.scene} />
       </mesh>
       <Stars
-        radius={100}
-        depth={50}
-        count={5000}
-        factor={4}
+        radius={108}
+        depth={0.9}
+        count={2500}
+        factor={4.5}
         saturation={0.9}
         fade
       />
-      <ambientLight intensity={-0.5} />
+      <ambientLight intensity={-0.6} />
     </a.group>
   );
 };
