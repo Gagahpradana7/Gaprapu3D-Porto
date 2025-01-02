@@ -20,7 +20,7 @@ const Sky = ({ isRotating, setIsRotating = () => {}, ...props }) => {
     return {
       radius: isMobile ? 140 : 125,
       depth: isMobile ? 1.5 : 1.2,
-      count: isMobile ? 3000 : 7000,
+      count: isMobile ? 3000 : 9000,
       factor: isMobile ? 6 : 5,
       saturation: 1,
     };
@@ -126,7 +126,7 @@ const Sky = ({ isRotating, setIsRotating = () => {}, ...props }) => {
         saturation={starsConfig.saturation}
         fade
       />
-      <ambientLight intensity={-0.8} />
+      <ambientLight intensity={-0.75} />
     </a.group>
   );
 };
