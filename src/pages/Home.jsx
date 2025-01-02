@@ -36,7 +36,9 @@ const TutorialOverlay = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white/90 p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Welcome!</h2>
+          <h2 className="text-xl font-bold text-gray-800">
+            Welcome To My 3D Portfolio !
+          </h2>
           <button
             onClick={handleClose}
             className="p-1 hover:bg-gray-100 rounded-full transition-colors"
@@ -49,16 +51,16 @@ const TutorialOverlay = () => {
           <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
             <MoveLeft className="w-8 h-8 text-blue-600 animate-pulse" />
             <p className="text-gray-700">
-              Swipe left or use the keyboard arrow in PC to rotate the island
-              portfolio
+              Swipe left or use the arrow key on your PC to rotate the island
+              portfolio.
             </p>
           </div>
 
           <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
             <MoveRight className="w-8 h-8 text-blue-600 animate-pulse" />
             <p className="text-gray-700">
-              Swipe right or use the keyboard arrow in PC to rotate the island
-              portfolio
+              Swipe right or use the arrow key on your PC to rotate the island
+              portfolio.
             </p>
           </div>
 

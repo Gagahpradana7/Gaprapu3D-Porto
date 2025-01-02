@@ -18,17 +18,17 @@ const Sky = ({ isRotating, setIsRotating = () => {}, ...props }) => {
   const starsConfig = useMemo(() => {
     const isMobile = viewport.width < 768;
     return {
-      radius: isMobile ? 140 : 125,
-      depth: isMobile ? 1.5 : 1.2,
-      count: isMobile ? 3000 : 9000,
-      factor: isMobile ? 6 : 5,
+      radius: isMobile ? 135 : 125,
+      depth: isMobile ? 1.3 : 1.2,
+      count: isMobile ? 4500 : 9000,
+      factor: isMobile ? 5 : 5,
       saturation: 1,
     };
   }, [viewport.width]);
 
   sky.scene.traverse((node) => {
     if (node.isMesh && node.material) {
-      node.material.color.set("#020518");
+      node.material.color.set("#050e4b");
       node.material.emissive.set("#0a1854");
       node.material.emissiveIntensity = 0.8;
     }
