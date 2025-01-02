@@ -1,5 +1,6 @@
 import { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
+import { MoveLeft, MoveRight, X } from "lucide-react";
 import Loader from "../components/Loader";
 import Island from "../models/Island";
 import Sky from "../models/Sky";
@@ -10,6 +11,72 @@ import zelda from "../assets/zelda.mp3";
 import soundon from "../assets/icons/soundon.png";
 import soundoff from "../assets/icons/soundoff.png";
 
+const TutorialOverlay = () => {
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  useEffect(() => {
+    const hasSeenTutorial = localStorage.getItem("hasSeenTutorial");
+    if (hasSeenTutorial) {
+      setShowOverlay(false);
+    }
+  }, []);
+  useEffect(() => {
+    const hasSeenTutorial = localStorage.getItem("hasSeenTutorial");
+    if (hasSeenTutorial === "true") {
+      setShowOverlay(false);
+    }
+  }, []);
+  const handleClose = () => {
+    setShowOverlay(false);
+    localStorage.setItem("hasSeenTutorial", "true");
+  };
+
+  if (!showOverlay) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="bg-white/90 p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-gray-800">Welcome!</h2>
+          <button
+            onClick={handleClose}
+            className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X className="w-6 h-6 text-gray-600" />
+          </button>
+        </div>
+
+        <div className="space-y-6">
+          <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+            <MoveLeft className="w-8 h-8 text-blue-600 animate-pulse" />
+            <p className="text-gray-700">
+              Swipe left or drag to rotate the island
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-lg">
+            <MoveRight className="w-8 h-8 text-blue-600 animate-pulse" />
+            <p className="text-gray-700">
+              Swipe right or drag to rotate the island
+            </p>
+          </div>
+
+          <p className="text-sm text-gray-600 text-center">
+            Explore different views of the island to discover more information
+          </p>
+        </div>
+
+        <button
+          onClick={handleClose}
+          className="w-full mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          Got it!
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const audioRef = useRef(null);
   const [isRotating, setIsRotating] = useState(false);
@@ -18,7 +85,7 @@ const Home = () => {
 
   useEffect(() => {
     audioRef.current = new Audio(zelda);
-    audioRef.current.volume = 0.4;
+    audioRef.current.volume = 0.5;
     audioRef.current.loop = true;
 
     const playAudio = async () => {
@@ -88,6 +155,7 @@ const Home = () => {
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
+
       <Canvas
         className={`w-full bg-transparent ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
@@ -120,14 +188,17 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
+
       <div className="absolute bottom-2 left-2">
         <img
           src={!isPlaying ? soundoff : soundon}
           alt="sound"
-          className="sm:w-12 w-10 xl:h-10 h-40 sm:h-52  cursor-pointer object-contain"
+          className="sm:w-12 w-10 xl:h-10 h-40 sm:h-60 cursor-pointer object-contain"
           onClick={() => setIsPlaying(!isPlaying)}
         />
       </div>
+
+      <TutorialOverlay />
     </section>
   );
 };

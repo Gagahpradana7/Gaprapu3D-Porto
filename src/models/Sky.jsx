@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { useGLTF, Stars } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import skyScene from "../assets/3d/sky.glb";
@@ -6,11 +6,25 @@ import { a } from "@react-spring/three";
 
 const Sky = ({ isRotating, setIsRotating, ...props }) => {
   const skyRef = useRef();
+  const starsRef = useRef();
   const { gl, viewport } = useThree();
   const sky = useGLTF(skyScene);
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
+
+  const time = useRef(0);
+
+  const starsConfig = useMemo(() => {
+    const isMobile = viewport.width < 768;
+    return {
+      radius: isMobile ? 120 : 108,
+      depth: isMobile ? 1.2 : 0.9,
+      count: isMobile ? 2000 : 5000,
+      factor: isMobile ? 5.5 : 4.5,
+      saturation: 0.9,
+    };
+  }, [viewport.width]);
 
   sky.scene.traverse((node) => {
     if (node.isMesh && node.material) {
@@ -68,13 +82,19 @@ const Sky = ({ isRotating, setIsRotating, ...props }) => {
     }
   };
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!isRotating) {
       rotationSpeed.current *= dampingFactor;
       if (Math.abs(rotationSpeed.current) < 0.001) {
         rotationSpeed.current = 0;
       }
       skyRef.current.rotation.y += rotationSpeed.current;
+    }
+
+    time.current += delta * 3;
+    if (starsRef.current) {
+      const pulse = Math.sin(time.current) * 0.5 + 0.5;
+      starsRef.current.material.opacity = 0.3 + pulse * 0.7;
     }
   });
 
@@ -100,11 +120,12 @@ const Sky = ({ isRotating, setIsRotating, ...props }) => {
         <primitive object={sky.scene} />
       </mesh>
       <Stars
-        radius={108}
-        depth={0.9}
-        count={2500}
-        factor={4.5}
-        saturation={0.9}
+        ref={starsRef}
+        radius={starsConfig.radius}
+        depth={starsConfig.depth}
+        count={starsConfig.count}
+        factor={starsConfig.factor}
+        saturation={starsConfig.saturation}
         fade
       />
       <ambientLight intensity={-0.6} />
