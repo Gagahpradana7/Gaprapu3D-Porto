@@ -13,24 +13,29 @@ import soundoff from "../assets/icons/soundoff.png";
 
 const TutorialOverlay = () => {
   const [showOverlay, setShowOverlay] = useState(true);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    const hasSeenTutorial = localStorage.getItem("hasSeenTutorial");
-    if (hasSeenTutorial) {
-      setShowOverlay(false);
+    if (!initialized) {
+      const hasSeenTutorial = window.localStorage.getItem("hasSeenTutorial");
+      if (hasSeenTutorial === "true") {
+        setShowOverlay(false);
+      }
+      setInitialized(true);
     }
-  }, []);
-  useEffect(() => {
-    const hasSeenTutorial = localStorage.getItem("hasSeenTutorial");
-    if (hasSeenTutorial === "true") {
-      setShowOverlay(false);
-    }
-  }, []);
+  }, [initialized]);
+
   const handleClose = () => {
-    setShowOverlay(false);
-    localStorage.setItem("hasSeenTutorial", "true");
+    try {
+      window.localStorage.setItem("hasSeenTutorial", "true");
+      setShowOverlay(false);
+    } catch (error) {
+      console.error("Error saving to localStorage:", error);
+      setShowOverlay(false);
+    }
   };
 
+  if (!initialized) return null;
   if (!showOverlay) return null;
 
   return (
